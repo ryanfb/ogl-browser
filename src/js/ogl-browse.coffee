@@ -67,6 +67,8 @@ build_interface = ->
     repo_url_fragment = _.last(repo.html_url.split('/'))
     if repo_url_fragment.match(ocr_pattern)
       ocr_identifier = repo_url_fragment.replace(ocr_pattern,'').replace(scan_pattern,'')
+      if ocr_identifier == 'ddd'
+        continue
       repo_link = $('<a>').attr('href',repo.html_url).attr('target','_blank').text(repo_url_fragment)
       repo_li_id = repo_url_fragment.replace(/\./g,'_')
       repo_li = $('<li>').attr('id',repo_li_id).attr('class','list-group-item')
