@@ -32,6 +32,13 @@ add_hathitrust_repo = (repo_li_id, identifier) ->
           record_text = record_text.replace(/([,/:])([^ ])/g, '\$1 \$2')
           if record_text
             repo_li.append($('<p>').text(record_text))
+      htid_item = _.filter(data['items'], (i) -> i['htid'] == identifier)[0]
+      enumcron = htid_item['enumcron']
+      orig = htid_item['orig']
+      if orig
+        repo_li.append($('<a>').attr('href',htid_item['itemURL']).text('Original from ' + orig))
+      if enumcron
+        repo_li.append($('<p>').text(enumcron))
       loader.remove()
 
 add_archive_repo = (repo_li_id, identifier) ->
