@@ -75,7 +75,10 @@ build_interface = ->
       repo_li.append(repo_link)
       repo_list.append(repo_li)
       if ocr_identifier.match(/\./) # hathitrust
-        ocr_identifier = ocr_identifier.replace(/\.ark-/,'.ark:').replace(/-/g,'/')
+        if ocr_identifier.match(/\.ark-/)
+          ocr_identifier = ocr_identifier.replace(/\.ark-/,'.ark:').replace(/-/g,'/')
+        else
+          ocr_identifier = ocr_identifier.replace(/\.-/,'.$')
         add_hathitrust_repo(repo_li_id, ocr_identifier)
       else # archive.org
         add_archive_repo(repo_li_id, ocr_identifier)
