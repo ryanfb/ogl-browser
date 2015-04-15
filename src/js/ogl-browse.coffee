@@ -3,7 +3,7 @@
 
 repos = []
 
-add_hathitrust_repo = (repo_li_id, identifier) ->
+add_hathitrust_repo = (repo_li_id, identifier, repo_name) ->
   console.log('add hathitrust repo: ' + identifier)
   repo_li = $("##{repo_li_id}")
   loader = ($('<div>').attr('class','ui active mini loader'))
@@ -25,6 +25,7 @@ add_hathitrust_repo = (repo_li_id, identifier) ->
       for record_key,record of data.records
         # console.log(record)
         repo_li.append($('<p>').append($('<a>').attr('href',record.recordURL).attr('target','_blank').text(identifier + ' on HathiTrust')))
+        repo_li.append($('<p>').append($('<a>').attr('href','https://ryanfb.github.io/hocr-reader/#/read/OpenGreekAndLatin/' + repo_name).attr('target','_blank').text(identifier + ' in hOCR Reader')))
         xml = $.parseXML(record['marc-xml'])
         # console.log(xml)
         for key in ['245','100','243','260'] # 500 504 700
@@ -41,12 +42,13 @@ add_hathitrust_repo = (repo_li_id, identifier) ->
         repo_li.append($('<p>').text(enumcron))
       loader.remove()
 
-add_archive_repo = (repo_li_id, identifier) ->
+add_archive_repo = (repo_li_id, identifier, repo_name) ->
   console.log('add archive repo: ' + identifier)
   # $.ajax "https://archive.org/details/#{identifier}&output=json",
   archive_link = $('<a>').attr('href',"https://archive.org/details/#{identifier}").attr('target','_blank').text(identifier + ' on archive.org')
   repo_li = $("##{repo_li_id}")
   repo_li.append($('<p>').append(archive_link))
+  repo_li.append($('<p>').append($('<a>').attr('href','https://ryanfb.github.io/hocr-reader/#/read/OpenGreekAndLatin/' + repo_name).attr('target','_blank').text(identifier + ' in hOCR Reader')))
   loader = ($('<div>').attr('class','ui active mini loader'))
   repo_li.append(loader)
   $.ajax "https://openlibrary.org/ia/#{identifier}.json",
@@ -86,9 +88,9 @@ build_interface = ->
           ocr_identifier = ocr_identifier.replace(/\.ark-/,'.ark:').replace(/-/g,'/')
         else
           ocr_identifier = ocr_identifier.replace(/\.-/,'.$')
-        add_hathitrust_repo(repo_li_id, ocr_identifier)
+        add_hathitrust_repo(repo_li_id, ocr_identifier, repo.name)
       else # archive.org
-        add_archive_repo(repo_li_id, ocr_identifier)
+        add_archive_repo(repo_li_id, ocr_identifier, repo.name)
 
 grab_repo_page = (url, callback) ->
   console.log('grab_repo_page: ' + url)
