@@ -12,6 +12,18 @@
       li p {
         margin: 0;
       }
+      .sort-group label {
+        margin-right: .75em;
+      }
+      .sort-group {
+        width: 100%;
+        text-align: right;
+        margin-bottom: 1em;
+      }
+      .repo-meta {
+        float: right;
+        color: #ccc;
+      }
     </style>
   </head>
   <body>
@@ -19,6 +31,16 @@
       <h1>OpenGreekAndLatin OCR Browser</h1>
       <div style="float:right;padding-right:1em"><iframe src="{{ site.baseurl }}/github-btn.html?user=ryanfb&repo=ogl-browser&type=fork&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="78" height="30"></iframe></div>
       <p class="lead">Browse links and metadata for OCR repos by <a href="https://github.com/OpenGreekAndLatin" target="_blank">the Open Greek and Latin Project on GitHub.</a></p>
+      <div class="sort-group">
+        <label>Sort By:</label>
+        <div class="btn-group" role="group" id="sort-by">
+          <button type="button" class="btn btn-default active" disabled=true data-sort-by="updated_at" data-sort-reverse=true>Updated At</button>
+          <button type="button" class="btn btn-default" disabled=true data-sort-by="created_at" data-sort-reverse=true>Created At</button>
+          <button type="button" class="btn btn-default" disabled=true data-sort-by="name" data-sort-reverse=false>Repository Title</button>
+          <button type="button" class="btn btn-default" disabled=true data-sort-by="book_title" data-sort-reverse=false>Book Title</button>
+          <button type="button" class="btn btn-default" disabled=true data-sort-by="book_author" data-sort-reverse=false>Book Author</button>
+        </div>
+      </div>
       {{ content }}
     </div>
   </body>
