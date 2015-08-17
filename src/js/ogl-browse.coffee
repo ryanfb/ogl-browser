@@ -78,6 +78,8 @@ build_interface = ->
   ocr_pattern = /[._]?201\d+-\d\d-\d\d-\d\d-\d\d[._]?/
   scan_pattern = /_.*$/
   repos = _.sortBy(repos, (repo) -> repo[repos_sort_by])
+  $('#repo-count').empty()
+  $('#repo-count').append($('<label>').text("#{repos.length} OCR repositories."))
   if repos_sort_reverse
     repos = repos.reverse()
   for repo in repos

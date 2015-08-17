@@ -16,13 +16,20 @@
         margin-right: .75em;
       }
       .sort-group {
-        width: 100%;
+        float: right;
         text-align: right;
         margin-bottom: 1em;
       }
       .repo-meta {
         float: right;
         color: #ccc;
+      }
+      .clear {
+        clear: both;
+      }
+      #repo-count {
+        float: left;
+        margin-top: .25em;
       }
     </style>
   </head>
@@ -31,6 +38,8 @@
       <h1>OpenGreekAndLatin OCR Browser</h1>
       <div style="float:right;padding-right:1em"><iframe src="{{ site.baseurl }}/github-btn.html?user=ryanfb&repo=ogl-browser&type=fork&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="78" height="30"></iframe></div>
       <p class="lead">Browse links and metadata for OCR repos by <a href="https://github.com/OpenGreekAndLatin" target="_blank">the Open Greek and Latin Project on GitHub.</a></p>
+      <div id="repo-count">
+      </div>
       <div class="sort-group">
         <label>Sort By:</label>
         <div class="btn-group" role="group" id="sort-by">
@@ -41,6 +50,7 @@
           <button type="button" class="btn btn-default" disabled=true data-sort-by="book_author" data-sort-reverse=false>Book Author</button>
         </div>
       </div>
+      <div class="clear"></div>
       {{ content }}
     </div>
   </body>
