@@ -78,8 +78,6 @@ build_interface = ->
   ocr_pattern = /[._]?201\d+-\d\d-\d\d-\d\d-\d\d[._]?/
   scan_pattern = /_.*$/
   repos = _.sortBy(repos, (repo) -> repo[repos_sort_by])
-  $('#repo-count').empty()
-  $('#repo-count').append($('<label>').text("#{repos.length} OCR repositories."))
   if repos_sort_reverse
     repos = repos.reverse()
   for repo in repos
@@ -106,6 +104,8 @@ build_interface = ->
         add_hathitrust_repo(repo_li_id, ocr_identifier, repo)
       else # archive.org
         add_archive_repo(repo_li_id, ocr_identifier, repo)
+  $('#repo-count').empty()
+  $('#repo-count').append($('<label>').text("#{$('#repo_list li').length} OCR repositories."))
   $('.sort-group button').attr('disabled',false)
 
 sort_button_click = () ->
